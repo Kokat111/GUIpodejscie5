@@ -48,6 +48,7 @@ namespace GUIpodejscie5 {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label6;
 
 
 
@@ -94,6 +95,7 @@ namespace GUIpodejscie5 {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -203,11 +205,26 @@ namespace GUIpodejscie5 {
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MainApp::button1_Click);
 			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label6->ForeColor = System::Drawing::Color::BlueViolet;
+			this->label6->Location = System::Drawing::Point(367, 84);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(102, 23);
+			this->label6->TabIndex = 28;
+			this->label6->Text = L"Logowanie";
+			this->label6->Click += gcnew System::EventHandler(this, &MainApp::label6_Click);
+			// 
 			// MainApp
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(871, 738);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->label1);
@@ -268,6 +285,12 @@ namespace GUIpodejscie5 {
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show("zakupiono bilet");
+}
+public:bool switchToAccount = false;
+private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->switchToAccount = true;
+	this->Close();
 }
 };
 	
