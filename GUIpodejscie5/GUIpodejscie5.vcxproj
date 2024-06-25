@@ -152,6 +152,9 @@
     <EmbeddedResource Include="MainForms.resx">
       <DependentUpon>MainForms.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyAccount.resx">
+      <DependentUpon>MyAccount.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.h</DependentUpon>
     </EmbeddedResource>
