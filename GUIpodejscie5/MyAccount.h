@@ -166,6 +166,7 @@ namespace GUIpodejscie5 {
 			this->button1->TabIndex = 26;
 			this->button1->Text = L"ZWROC BILET";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &MyAccount::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -229,6 +230,9 @@ public:bool switchToAccount = false;
 		this->Close();
 	}
 private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show("ZWROCONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 };
 }
