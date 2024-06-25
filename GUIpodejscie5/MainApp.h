@@ -1,6 +1,7 @@
 #pragma once
 #include"MainForms.h"
 #include "SqlManage.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace GUIpodejscie5 {
 
@@ -43,6 +44,12 @@ namespace GUIpodejscie5 {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ godzOdjazdu;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ godzPrzyj;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ cena;
+
+
+
+
+
+
 	protected:
 
 	protected:
@@ -160,8 +167,15 @@ namespace GUIpodejscie5 {
 		{
 			std::string sql1 = "SELECT * FROM TicketData WHERE Id ="+sid+"";
 			TicketData* ticketData = db.getTicket(sql1.c_str());
-			ticketData->id;
-			this->dataGridView1->Rows->Add(NULL, NULL, NULL, NULL, NULL, NULL);
+			
+			String^ strid= ticketData->id;
+			ticketData->stacjaPocz;
+			ticketData->stacjaKonc;
+			ticketData->godzOdjazdu;
+			ticketData->godzPrzyjazdu;
+			ticketData->cena;
+
+			this->dataGridView1->Rows->Add( NULL, NULL, NULL, NULL, NULL, NULL);
 		}
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
