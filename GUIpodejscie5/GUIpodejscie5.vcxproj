@@ -82,7 +82,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>sqlite3.lib</AdditionalDependencies>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
@@ -121,12 +121,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="MainForms.cpp" />
+    <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Register.cpp" />
     <ClCompile Include="SqlManage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libs.h" />
+    <ClInclude Include="MainApp.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MainForms.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -137,6 +142,9 @@
     <ClInclude Include="SqlManage.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MainApp.resx">
+      <DependentUpon>MainApp.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForms.resx">
       <DependentUpon>MainForms.h</DependentUpon>
     </EmbeddedResource>

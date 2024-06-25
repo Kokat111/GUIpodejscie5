@@ -237,7 +237,7 @@ namespace GUIpodejscie5 {
 		if (loginData != NULL) {
 			if (stdpassword == loginData->Password) {
 				this->switchToApp = true;
-				label4->Visible = true;
+				this->Close();
 			}
 		}
 		else

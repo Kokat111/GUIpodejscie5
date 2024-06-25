@@ -1,4 +1,5 @@
 #include "MainForms.h"
+#include "MainApp.h"
 #include "Register.h"
 
 using namespace System;
@@ -17,16 +18,25 @@ int main(array<String^>^ args) {
             registerForm.ShowDialog();
             if (registerForm.switchToRegister)
             {
-                continue;
+                if (mainForm.switchToApp)
+                {
+                    GUIpodejscie5::MainApp appForm;
+                    appForm.ShowDialog();
+                    break;
+                }
+                break;
             }
             else {
                 break;
             }
         }
-        else
+        if(mainForm.switchToApp)
         {
+            GUIpodejscie5::MainApp appForm;
+            appForm.ShowDialog();
             break;
         }
+        break;
 
     }
 }
