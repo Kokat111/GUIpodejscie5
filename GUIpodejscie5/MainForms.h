@@ -274,11 +274,11 @@ namespace GUIpodejscie5 {
 		else
 		{
 			if (stdpassword != loginData->Password) {
-				label7->Text = "Zly login lub haslo";
-				label7->ForeColor = System::Drawing::Color::OrangeRed;
+				this->label7->Text = "Zly login lub haslo";
+				this->label7->ForeColor = System::Drawing::Color::OrangeRed;
 			}
 			else
-				label7->ForeColor = System::Drawing::Color::OrangeRed;
+				this->label7->ForeColor = System::Drawing::Color::OrangeRed;
 
 		}
 

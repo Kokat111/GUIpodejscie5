@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="MainForms.cpp" />
+    <ClCompile Include="MyAccount.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Register.cpp" />
     <ClCompile Include="SqlManage.cpp" />
@@ -133,6 +134,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MainForms.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MyAccount.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Register.h">

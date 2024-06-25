@@ -1,7 +1,7 @@
 #pragma once
 #include"MainForms.h"
 #include "SqlManage.h"
-#include <msclr\marshal_cppstd.h>
+#include <msclr/marshal.h>
 
 namespace GUIpodejscie5 {
 
@@ -156,6 +156,11 @@ namespace GUIpodejscie5 {
 
 		}
 #pragma endregion
+		System::String^ StdStringToSystemString(const std::string& stdString) {
+			msclr::interop::marshal_context context;
+			System::String^ managedString = context.marshal_as<System::String^>(stdString.c_str());
+			return managedString;
+		}
 	private: System::Void MainApp_Load(System::Object^ sender, System::EventArgs^ e) {
 		std::cout << "test";
 		SqlManage db;
@@ -167,15 +172,27 @@ namespace GUIpodejscie5 {
 		{
 			std::string sql1 = "SELECT * FROM TicketData WHERE Id ="+sid+"";
 			TicketData* ticketData = db.getTicket(sql1.c_str());
-			
-			String^ strid= ticketData->id;
+			ticketData->id;
 			ticketData->stacjaPocz;
 			ticketData->stacjaKonc;
 			ticketData->godzOdjazdu;
 			ticketData->godzPrzyjazdu;
 			ticketData->cena;
+			std::string stdId = ticketData->id;
+			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdId = ticketData->stacjaPocz;
+			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdId = ticketData->stacjaKonc;
+			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdId = ticketData->godzOdjazdu;
+			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdId = ticketData->id;
+			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdId = ticketData->id;
+			System::String^ managedId = StdStringToSystemString(stdId);
 
-			this->dataGridView1->Rows->Add( NULL, NULL, NULL, NULL, NULL, NULL);
+
+			this->dataGridView1->Rows->Add( managedId, NULL, NULL, NULL, NULL, NULL);
 		}
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
