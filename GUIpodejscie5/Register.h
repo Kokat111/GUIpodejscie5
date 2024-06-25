@@ -247,31 +247,48 @@ namespace GUIpodejscie5 {
 		return true;
 	}
 	public:bool switchToRegister = false;
+	public:bool switchToApp = false;
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->switchToRegister = true;
 		this->Close();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		std::string reglogin, regpassword, regpassword2;
+		String^ reglogin=textBox1->Text;
+		String^ regpassword= textBox2->Text;
+		String^ regpassword2= textBox3->Text;
+		using namespace System::Runtime::InteropServices;
+
+		const char* charsl = (const char*)(Marshal::StringToHGlobalAnsi(reglogin)).ToPointer();
+		std::string stdlogin = charsl;
+		Marshal::FreeHGlobal(IntPtr((void*)charsl));
+
+		const char* charsp = (const char*)(Marshal::StringToHGlobalAnsi(regpassword)).ToPointer();
+		std::string stdpassword = charsp;
+		Marshal::FreeHGlobal(IntPtr((void*)charsp));
+
+		const char* charsp2 = (const char*)(Marshal::StringToHGlobalAnsi(regpassword2)).ToPointer();
+		std::string stdpassword2 = charsp2;
+		Marshal::FreeHGlobal(IntPtr((void*)charsp2));
+
 		SqlManage db;
-		std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + reglogin + "'";
+		std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + stdlogin + "'";
 		UserData* loginData = db.getUser(sql1.c_str());
 		if (loginData != NULL) {
-			std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + reglogin + "'";
-			UserData* loginData = db.getUser(sql1.c_str());
+			
 		}
 		else {
-			if (regpassword != regpassword2 || CapitallLetter(regpassword)) {
-				if (CapitallLetter(regpassword)) {
-					std::cout << "Brak wielkiej litery" << std::endl;
+			if (stdpassword != stdpassword2 || CapitallLetter(stdpassword)) {
+				if (stdpassword != stdpassword2) {
 				}
-				if (regpassword != regpassword2) {
-					std::cout << "Niezgodnosc powtorzonego hasla" << std::endl;
+				if (CapitallLetter(stdpassword)) {
 				}
 			}
-			std::string sql1 = "INSERT INTO UserData (UserName, Password, Money) VALUES ( '" + reglogin + "', '" + regpassword + "',0);";
+			std::string ida;
+			int id= db.sqlGetId("UserData");
+			ida=std::to_string(id);
+			std::string sql1 = "INSERT INTO UserData (Id,UserName, Password, Money) VALUES ( "+ida+",'" + stdlogin + "', '" + stdpassword + "',0);";
 			db.sqlExecute(sql1.c_str());
-			std::cout << "dziala";
+			this->switchToApp = true;
 		}
 	}
 };

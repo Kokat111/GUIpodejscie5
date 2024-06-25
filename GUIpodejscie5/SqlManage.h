@@ -29,7 +29,7 @@ public:
     TicketData* getTicket(const char* sql); //funkcja wpisuj¹ca dane usera do struktury
     void retriveData(std::string select, std::string from, std::string where);//funkcja do testowania zapytania SELECT
     void sqlExecute(const char* sql);//funkcja wykonuj¹ca podane polecenie sql
-
+    int sqlGetId(std::string table);
 
 private:
     sqlite3* db;

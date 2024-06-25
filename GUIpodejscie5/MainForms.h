@@ -223,7 +223,7 @@ namespace GUIpodejscie5 {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		SqlManage db;
 		String^ password = textBox1->Text;
-		String^ login = textBox1->Text;
+		String^ login = textBox2->Text;
 		using namespace System::Runtime::InteropServices;
 		const char* charsl = (const char*)(Marshal::StringToHGlobalAnsi(login)).ToPointer();
 		std::string stdlogin = charsl;
@@ -236,7 +236,7 @@ namespace GUIpodejscie5 {
 		UserData* loginData = db.getUser(sql1.c_str());
 		if (loginData != NULL) {
 			if (stdpassword == loginData->Password) {
-				switchToApp = true;
+				this->switchToApp = true;
 				label4->Visible = true;
 			}
 		}

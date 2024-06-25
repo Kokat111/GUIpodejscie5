@@ -31,7 +31,7 @@ UserData* SqlManage::getUser(const char* sql) {
         user->id = reinterpret_cast<const char*>(id);
         user->UserName = reinterpret_cast<const char*>(userName);
         user->Password = reinterpret_cast<const char*>(password);
-        user->Money = reinterpret_cast<const char*>(password);
+        user->Money = reinterpret_cast<const char*>(money);
 
         if (userCurrent == NULL) {
             userCurrent = user;
@@ -118,4 +118,23 @@ void SqlManage::sqlExecute(const char* sql) {
         std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
     }
     sqlite3_finalize(stmt);
+}
+
+int SqlManage::sqlGetId(std::string table) {
+
+    sqlite3_stmt* stmt;
+    std::string sql1 = "SELECT * FROM "+table+"";
+    int rc = sqlite3_prepare_v2(this->db, sql1.c_str(), -1, &stmt, nullptr);
+    int i = 0;
+    if (rc != SQLITE_OK) {
+        std::cerr << "Failed to prepare statement: " << sqlite3_errmsg(this->db) << std::endl;
+    }
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        i++;
+    }
+    if (rc != SQLITE_DONE) {
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+    }
+    sqlite3_finalize(stmt);
+    return i+1;
 }
