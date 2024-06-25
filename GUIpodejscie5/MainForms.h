@@ -1,6 +1,7 @@
 #pragma once
 #include "Register.h"
-
+#include "SqlManage.h"
+#include <iostream>
 
 namespace GUIpodejscie5 {
 	using namespace System;
@@ -45,6 +46,7 @@ namespace GUIpodejscie5 {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label4;
 
 	private:
 		/// <summary>
@@ -68,6 +70,7 @@ namespace GUIpodejscie5 {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label6
@@ -181,12 +184,23 @@ namespace GUIpodejscie5 {
 			this->label1->TabIndex = 24;
 			this->label1->Text = L"Logowanie";
 			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(194, 31);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(56, 13);
+			this->label4->TabIndex = 33;
+			this->label4->Text = L"test udany";
+			this->label4->Visible = false;
+			// 
 			// MainForms
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->ClientSize = System::Drawing::Size(476, 585);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->checkBox2);
@@ -205,12 +219,37 @@ namespace GUIpodejscie5 {
 
 		}
 #pragma endregion
+	public:bool switchToApp = false;
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		SqlManage db;
+		String^ password = textBox1->Text;
+		String^ login = textBox1->Text;
+		using namespace System::Runtime::InteropServices;
+		const char* charsl = (const char*)(Marshal::StringToHGlobalAnsi(login)).ToPointer();
+		std::string stdlogin = charsl;
+		Marshal::FreeHGlobal(IntPtr((void*)charsl));
+		using namespace System::Runtime::InteropServices;
+		const char* charsp = (const char*)(Marshal::StringToHGlobalAnsi(password)).ToPointer();
+		std::string stdpassword = charsp;
+		Marshal::FreeHGlobal(IntPtr((void*)charsp));
+		std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + stdlogin + "'";
+		UserData* loginData = db.getUser(sql1.c_str());
+		if (loginData != NULL) {
+			if (stdpassword == loginData->Password) {
+				switchToApp = true;
+				label4->Visible = true;
+			}
+		}
+		else
+		{
+
+		}
+
 	}
 	public:bool switchToRegister = false;
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->switchToRegister=true;
+		this->switchToRegister = true;
 		this->Close();
 	}
-	};
+};
 }

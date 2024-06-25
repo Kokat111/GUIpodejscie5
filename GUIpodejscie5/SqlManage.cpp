@@ -39,7 +39,7 @@ UserData* SqlManage::getUser(const char* sql) {
     }
 
     if (rc != SQLITE_DONE) {
-        cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
     }
 
     sqlite3_finalize(stmt);
@@ -79,7 +79,7 @@ TicketData* SqlManage::getTicket(const char* sql) {
     }
 
     if (rc != SQLITE_DONE) {
-        cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
     }
 
     sqlite3_finalize(stmt);
@@ -87,15 +87,15 @@ TicketData* SqlManage::getTicket(const char* sql) {
     return currentTicket;
 }
 
-void SqlManage::retriveData(string select, string from, string where) {
+void SqlManage::retriveData(std::string select, std::string from, std::string where) {
     sqlite3_stmt* stmt;
     char* messageError;
-    string sql = "SELECT " + select + " FROM " + from + " WHERE " + where + ";";
+    std::string sql = "SELECT " + select + " FROM " + from + " WHERE " + where + ";";
     int exit = sqlite3_open("Data.db", &this->db);
     exit = sqlite3_prepare_v2(this->db, sql.c_str(), -1, &stmt, NULL);
     if (exit != SQLITE_OK) {
 
-        cerr << "Error in selectData function." << endl;
+        std::cerr << "Error in selectData function." << std::endl;
     }
     else {
         while (exit = sqlite3_step(stmt) == SQLITE_ROW)
@@ -115,7 +115,7 @@ void SqlManage::sqlExecute(const char* sql) {
     while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
     }
     if (rc != SQLITE_DONE) {
-        cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
     }
     sqlite3_finalize(stmt);
 }

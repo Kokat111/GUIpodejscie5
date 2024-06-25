@@ -1,25 +1,25 @@
 #pragma once
 #include "Libs.h"
 struct UserData {
-    string id;
-    string UserName;
-    string Password;
-    string Money;
+    std::string id;
+    std::string UserName;
+    std::string Password;
+    std::string Money;
 };
 struct TicketData {
-    string id;
-    string stacjaPocz;
-    string stacjaKonc;
-    string cena;
-    string godzPrzyjazdu;
-    string godzOdjazdu;
+    std::string id;
+    std::string stacjaPocz;
+    std::string stacjaKonc;
+    std::string cena;
+    std::string godzPrzyjazdu;
+    std::string godzOdjazdu;
     UserData* next;
 };
 struct BookingData
 {
-    string id;
-    string User_id;
-    string Ticket_id;
+    std::string id;
+    std::string User_id;
+    std::string Ticket_id;
 };
 class SqlManage
 {
@@ -27,7 +27,7 @@ public:
     SqlManage();//konstruktor inicjuj¹cy baze danych 
     UserData* getUser(const char* sql); //funkcja wpisuj¹ca dane usera do struktury
     TicketData* getTicket(const char* sql); //funkcja wpisuj¹ca dane usera do struktury
-    void retriveData(string select, string from, string where);//funkcja do testowania zapytania SELECT
+    void retriveData(std::string select, std::string from, std::string where);//funkcja do testowania zapytania SELECT
     void sqlExecute(const char* sql);//funkcja wykonuj¹ca podane polecenie sql
 
 

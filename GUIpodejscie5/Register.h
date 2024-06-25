@@ -1,5 +1,6 @@
 #pragma once
 #include"MainForms.h"
+#include "SqlManage.h"
 
 namespace GUIpodejscie5 {
 
@@ -125,6 +126,7 @@ namespace GUIpodejscie5 {
 			this->button1->TabIndex = 20;
 			this->button1->Text = L"Zarejestruj";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &Register::button1_Click);
 			// 
 			// textBox3
 			// 
@@ -236,10 +238,41 @@ namespace GUIpodejscie5 {
 	private: System::Void Register_Load(System::Object^ sender, System::EventArgs^ e) {
 
 	}
+	private:bool CapitallLetter(std::string& tekst) {//funkcja do sprawdzania czy w tekscie jest wielka litera
+		for (char c : tekst) {
+			if (isupper(c)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	public:bool switchToRegister = false;
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->switchToRegister = true;
 		this->Close();
-}
+	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		std::string reglogin, regpassword, regpassword2;
+		SqlManage db;
+		std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + reglogin + "'";
+		UserData* loginData = db.getUser(sql1.c_str());
+		if (loginData != NULL) {
+			std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + reglogin + "'";
+			UserData* loginData = db.getUser(sql1.c_str());
+		}
+		else {
+			if (regpassword != regpassword2 || CapitallLetter(regpassword)) {
+				if (CapitallLetter(regpassword)) {
+					std::cout << "Brak wielkiej litery" << std::endl;
+				}
+				if (regpassword != regpassword2) {
+					std::cout << "Niezgodnosc powtorzonego hasla" << std::endl;
+				}
+			}
+			std::string sql1 = "INSERT INTO UserData (UserName, Password, Money) VALUES ( '" + reglogin + "', '" + regpassword + "',0);";
+			db.sqlExecute(sql1.c_str());
+			std::cout << "dziala";
+		}
+	}
 };
 }
