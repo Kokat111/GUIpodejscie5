@@ -138,3 +138,36 @@ int SqlManage::sqlGetId(std::string table) {
     sqlite3_finalize(stmt);
     return i+1;
 }
+std::list<TicketData*> SqlManage::returnDataListTicket() {
+    sqlite3_stmt* stmt;
+    std::list<TicketData*> a;
+    std::string sql1 = "SELECT * FROM TicketData";
+    int rc = sqlite3_prepare_v2(this->db, sql1.c_str(), -1, &stmt, nullptr);
+    int i = 0;
+    if (rc != SQLITE_OK) {
+        std::cerr << "Failed to prepare statement: " << sqlite3_errmsg(this->db) << std::endl;
+    }
+    TicketData* currentTicket = NULL;
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        const unsigned char* id = sqlite3_column_text(stmt, 0);
+        const unsigned char* stacjaPocz = sqlite3_column_text(stmt, 1);
+        const unsigned char* stacjaKonc = sqlite3_column_text(stmt, 2);
+        const unsigned char* cena = sqlite3_column_text(stmt, 3);
+        const unsigned char* godzPrzyjazdu = sqlite3_column_text(stmt, 4);
+        const unsigned char* godzOdjazdu = sqlite3_column_text(stmt, 5);
+        auto* ticket = new TicketData;
+        ticket->id = reinterpret_cast<const char*>(id);
+        ticket->stacjaPocz = reinterpret_cast<const char*>(stacjaPocz);
+        ticket->stacjaKonc = reinterpret_cast<const char*>(stacjaKonc);
+        ticket->cena = reinterpret_cast<const char*>(cena);
+        ticket->godzPrzyjazdu = reinterpret_cast<const char*>(godzPrzyjazdu);
+        ticket->godzOdjazdu = reinterpret_cast<const char*>(godzOdjazdu);
+        currentTicket = ticket;
+        a.push_back(currentTicket);
+    }
+    if (rc != SQLITE_DONE) {
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+    }
+    sqlite3_finalize(stmt);
+    return a;
+}

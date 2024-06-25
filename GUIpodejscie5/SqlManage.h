@@ -1,5 +1,6 @@
 #pragma once
 #include "Libs.h"
+#include <list>
 struct UserData {
     std::string id;
     std::string UserName;
@@ -21,6 +22,7 @@ struct BookingData
     std::string User_id;
     std::string Ticket_id;
 };
+std::list<TicketData>;
 class SqlManage
 {
 public:
@@ -30,6 +32,7 @@ public:
     void retriveData(std::string select, std::string from, std::string where);//funkcja do testowania zapytania SELECT
     void sqlExecute(const char* sql);//funkcja wykonuj¹ca podane polecenie sql
     int sqlGetId(std::string table);
+    std::list<TicketData*> returnDataListTicket();
 
 private:
     sqlite3* db;
