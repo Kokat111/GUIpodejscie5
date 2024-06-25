@@ -186,7 +186,6 @@ namespace GUIpodejscie5 {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(244, 39);
 			this->textBox2->TabIndex = 18;
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MainApp::textBox2_TextChanged);
 			// 
 			// button1
 			// 
