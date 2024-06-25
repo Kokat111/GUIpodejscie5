@@ -279,6 +279,7 @@ namespace GUIpodejscie5 {
 		else {
 			if (stdpassword != stdpassword2 || CapitallLetter(stdpassword)) {
 				if (stdpassword != stdpassword2) {
+
 				}
 				if (CapitallLetter(stdpassword)) {
 				}

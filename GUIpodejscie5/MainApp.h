@@ -35,6 +35,11 @@ namespace GUIpodejscie5 {
 			}
 		}
 
+
+
+
+	protected:
+
 	private:
 		/// <summary>
 		/// Wymagana zmienna projektanta.
@@ -54,7 +59,8 @@ namespace GUIpodejscie5 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 261);
+			this->ClientSize = System::Drawing::Size(653, 600);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"MainApp";
 			this->Text = L"MainApp";
 			this->Load += gcnew System::EventHandler(this, &MainApp::MainApp_Load);
@@ -63,6 +69,9 @@ namespace GUIpodejscie5 {
 		}
 #pragma endregion
 	private: System::Void MainApp_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+
 	}
 	};
 }
