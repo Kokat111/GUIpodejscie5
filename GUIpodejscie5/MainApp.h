@@ -167,9 +167,10 @@ namespace GUIpodejscie5 {
 		int id = db.sqlGetId("TicketData");
 		DataTable^ dt = gcnew DataTable();
 		id = id - 1;
-		std::string sid = std::to_string(id);
+
 		for (int i = 0; i < id; i++)
 		{
+			std::string sid = std::to_string(i+1);
 			std::string sql1 = "SELECT * FROM TicketData WHERE Id ="+sid+"";
 			TicketData* ticketData = db.getTicket(sql1.c_str());
 			ticketData->id;
@@ -180,19 +181,19 @@ namespace GUIpodejscie5 {
 			ticketData->cena;
 			std::string stdId = ticketData->id;
 			System::String^ managedId = StdStringToSystemString(stdId);
-			std::string stdId = ticketData->stacjaPocz;
-			System::String^ managedId = StdStringToSystemString(stdId);
-			std::string stdId = ticketData->stacjaKonc;
-			System::String^ managedId = StdStringToSystemString(stdId);
-			std::string stdId = ticketData->godzOdjazdu;
-			System::String^ managedId = StdStringToSystemString(stdId);
-			std::string stdId = ticketData->id;
-			System::String^ managedId = StdStringToSystemString(stdId);
-			std::string stdId = ticketData->id;
-			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdSP = ticketData->stacjaPocz;
+			System::String^ managedSP = StdStringToSystemString(stdSP);
+			std::string stdSK = ticketData->stacjaKonc;
+			System::String^ managedSK = StdStringToSystemString(stdSK);
+			std::string stdGO = ticketData->godzOdjazdu;
+			System::String^ managedGO = StdStringToSystemString(stdGO);
+			std::string stdGP = ticketData->godzPrzyjazdu;
+			System::String^ managedGP = StdStringToSystemString(stdGP);
+			std::string stdCena = ticketData->cena;
+			System::String^ managedCena = StdStringToSystemString(stdCena);
 
 
-			this->dataGridView1->Rows->Add( managedId, NULL, NULL, NULL, NULL, NULL);
+			this->dataGridView1->Rows->Add( managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
 		}
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
