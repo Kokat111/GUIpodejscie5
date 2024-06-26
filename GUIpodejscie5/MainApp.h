@@ -285,7 +285,7 @@ namespace GUIpodejscie5 {
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("zakupiono bilet");
+	MessageBox::Show("ZAKUPIONO BILET","  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 public:bool switchToAccount = false;
 private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {

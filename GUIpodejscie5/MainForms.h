@@ -210,6 +210,7 @@ namespace GUIpodejscie5 {
 			this->label7->Size = System::Drawing::Size(42, 16);
 			this->label7->TabIndex = 34;
 			this->label7->Text = L"label7";
+
 			// 
 			// MainForms
 			// 
@@ -260,23 +261,14 @@ namespace GUIpodejscie5 {
 
 		std::string sql1 = "SELECT * FROM UserData WHERE UserName='" + stdlogin + "'";
 		UserData* loginData = db.getUser(sql1.c_str());
+		this->label7->Text = "Zly login lub haslo";
+		this->label7->ForeColor = System::Drawing::Color::OrangeRed;
 		if (loginData != NULL) {
 			if (stdpassword == loginData->Password) {
 				this->switchToApp = true;
 				this->Close();
 			}
 		}
-		else
-		{
-			if (stdpassword != loginData->Password) {
-				this->label7->Text = "Zly login lub haslo";
-				this->label7->ForeColor = System::Drawing::Color::OrangeRed;
-			}
-			else
-				this->label7->ForeColor = System::Drawing::Color::OrangeRed;
-
-		}
-
 	}
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->switchToRegister = true;
@@ -296,5 +288,7 @@ namespace GUIpodejscie5 {
 	private: System::Void MainForms_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e) {
 		dzial=false;
 	}
+private: System::Void label7_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
