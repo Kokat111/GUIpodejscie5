@@ -319,6 +319,7 @@ namespace GUIpodejscie5 {
 			System::String^ managedString = context.marshal_as<System::String^>(stdString.c_str());
 			return managedString;
 		}
+	public:bool switchToAccount = false;
 	private: System::Void MainApp_Load(System::Object^ sender, System::EventArgs^ e) {
 		std::cout << "test";
 		SqlManage db;
@@ -363,7 +364,6 @@ namespace GUIpodejscie5 {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		MessageBox::Show("ZAKUPIONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
-	public:bool switchToAccount = false;
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->switchToAccount = true;
 		this->Close();
@@ -468,6 +468,8 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	}
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->switchToAccount = true;
+	this->Hide();
 }
 };
 }
