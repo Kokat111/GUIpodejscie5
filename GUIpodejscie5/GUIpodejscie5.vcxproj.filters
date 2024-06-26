@@ -24,9 +24,6 @@
     <ClCompile Include="SqlManage.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="MyForm.cpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClCompile>
     <ClCompile Include="MainApp.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>

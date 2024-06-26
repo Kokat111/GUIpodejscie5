@@ -124,7 +124,6 @@
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="MainForms.cpp" />
     <ClCompile Include="MyAccount.cpp" />
-    <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Register.cpp" />
     <ClCompile Include="SqlManage.cpp" />
   </ItemGroup>
