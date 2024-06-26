@@ -86,6 +86,39 @@ TicketData* SqlManage::getTicket(const char* sql) {
 
     return currentTicket;
 }
+BookingData* SqlManage::getBooking(const char* sql) {
+    sqlite3_stmt* stmt;
+    int rc = sqlite3_prepare_v2(this->db, sql, -1, &stmt, nullptr);
+
+    if (rc != SQLITE_OK) {
+        std::cerr << "Failed to prepare statement: " << sqlite3_errmsg(this->db) << std::endl;
+        return NULL;
+    }
+
+    BookingData* userCurrent = NULL;
+
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        const unsigned char* id = sqlite3_column_text(stmt, 0);
+        const unsigned char* idUser = sqlite3_column_text(stmt, 1);
+        const unsigned char* idTicket = sqlite3_column_text(stmt, 2);
+        auto* user = new BookingData;
+        user->id = reinterpret_cast<const char*>(id);
+        user->User_id = reinterpret_cast<const char*>(idUser);
+        user->Ticket_id = reinterpret_cast<const char*>(idTicket);
+
+        if (userCurrent == NULL) {
+            userCurrent = user;
+        }
+    }
+
+    if (rc != SQLITE_DONE) {
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+    }
+
+    sqlite3_finalize(stmt);
+
+    return userCurrent;
+}
 
 void SqlManage::retriveData(std::string select, std::string from, std::string where) {
     sqlite3_stmt* stmt;
@@ -138,6 +171,24 @@ int SqlManage::sqlGetId(std::string table) {
     sqlite3_finalize(stmt);
     return i+1;
 }
+int SqlManage::sqlGetIdWhere(std::string table, std::string where) {
+
+    sqlite3_stmt* stmt;
+    std::string sql1 = "SELECT * FROM " + table + " WHERE " + where + "";
+    int rc = sqlite3_prepare_v2(this->db, sql1.c_str(), -1, &stmt, nullptr);
+    int i = 0;
+    if (rc != SQLITE_OK) {
+        std::cerr << "Failed to prepare statement: " << sqlite3_errmsg(this->db) << std::endl;
+    }
+    while ((rc = sqlite3_step(stmt)) == SQLITE_ROW) {
+        i++;
+    }
+    if (rc != SQLITE_DONE) {
+        std::cout << "Failed to execute statement: " << sqlite3_errmsg(db) << std::endl;
+    }
+    sqlite3_finalize(stmt);
+    return i + 1;
+}
 std::list<TicketData*> SqlManage::returnDataListTicket() {
     sqlite3_stmt* stmt;
     std::list<TicketData*> a;
@@ -171,3 +222,7 @@ std::list<TicketData*> SqlManage::returnDataListTicket() {
     sqlite3_finalize(stmt);
     return a;
 }
+int SqlManage::setUser(int i) {
+    return id = i;
+}
+;

@@ -1,6 +1,7 @@
 #pragma once
 #include"MainForms.h"
 #include "SqlManage.h"
+#include "UserId.h"
 #include <msclr/marshal.h>
 
 namespace GUIpodejscie5 {
@@ -54,6 +55,8 @@ namespace GUIpodejscie5 {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::TextBox^ textBox4;
+	private: System::Windows::Forms::Label^ label2;
 
 
 
@@ -107,6 +110,8 @@ namespace GUIpodejscie5 {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -198,6 +203,7 @@ namespace GUIpodejscie5 {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(183, 31);
 			this->textBox2->TabIndex = 18;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MainApp::textBox2_TextChanged);
 			// 
 			// button1
 			// 
@@ -289,11 +295,39 @@ namespace GUIpodejscie5 {
 			this->button4->UseVisualStyleBackColor = false;
 			this->button4->Click += gcnew System::EventHandler(this, &MainApp::button4_Click);
 			// 
+			// textBox4
+			// 
+			this->textBox4->BackColor = System::Drawing::Color::Gainsboro;
+			this->textBox4->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->textBox4->Location = System::Drawing::Point(623, 114);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(183, 31);
+			this->textBox4->TabIndex = 36;
+			this->textBox4->TextChanged += gcnew System::EventHandler(this, &MainApp::textBox4_TextChanged);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label2->ForeColor = System::Drawing::Color::BlueViolet;
+			this->label2->Location = System::Drawing::Point(658, 89);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(103, 19);
+			this->label2->TabIndex = 35;
+			this->label2->Text = L"Podaj swoje id";
+			this->label2->Click += gcnew System::EventHandler(this, &MainApp::label2_Click);
+			// 
 			// MainApp
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(871, 738);
+			this->Controls->Add(this->textBox4);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->button3);
@@ -314,6 +348,7 @@ namespace GUIpodejscie5 {
 
 		}
 #pragma endregion
+
 		System::String^ StdStringToSystemString(const std::string& stdString) {
 			msclr::interop::marshal_context context;
 			System::String^ managedString = context.marshal_as<System::String^>(stdString.c_str());
@@ -324,7 +359,7 @@ namespace GUIpodejscie5 {
 		std::cout << "test";
 		SqlManage db;
 		int id = db.sqlGetId("TicketData");
-		DataTable^ dt = gcnew DataTable();
+		//DataTable^ dt = gcnew DataTable();
 		id = id - 1;
 
 		for (int i = 0; i < id; i++)
@@ -332,7 +367,6 @@ namespace GUIpodejscie5 {
 			std::string sid = std::to_string(i + 1);
 			std::string sql1 = "SELECT * FROM TicketData WHERE Id =" + sid + "";
 			TicketData* ticketData = db.getTicket(sql1.c_str());
-
 
 			ticketData->id;
 			ticketData->stacjaPocz;
@@ -362,7 +396,40 @@ namespace GUIpodejscie5 {
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		MessageBox::Show("ZAKUPIONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		SqlManage db;
+
+		String^ TicketId = textBox2->Text;
+		using namespace System::Runtime::InteropServices;
+		const char* charsp2 = (const char*)(Marshal::StringToHGlobalAnsi(TicketId)).ToPointer();
+		std::string stdTicketId = charsp2;
+		Marshal::FreeHGlobal(IntPtr((void*)charsp2));
+
+		String^ UserId = textBox4->Text;
+		using namespace System::Runtime::InteropServices;
+		const char* charsp1 = (const char*)(Marshal::StringToHGlobalAnsi(UserId)).ToPointer();
+		std::string stdUserId = charsp1;
+		Marshal::FreeHGlobal(IntPtr((void*)charsp1));
+
+		int id = stoi(stdTicketId);
+		std::string sql1 = "SELECT * FROM TicketData WHERE Id ='"+stdTicketId+"'";
+		TicketData* ticketData = db.getTicket(sql1.c_str());
+		int liebil = db.sqlGetId("TicketData");
+
+
+		std::string sql3 = "SELECT * FROM Booking WHERE User_id ='" + stdUserId + "'AND Ticket_id='" + stdTicketId + "'";
+		BookingData* bookingData = db.getBooking(sql3.c_str());
+
+		if (ticketData != NULL && id<= liebil && bookingData==NULL)
+		{
+			
+			int i = db.sqlGetId("Booking");
+			std::string ida = std::to_string(i);
+			//std::cout << std::endl<< ida<<" " << stdUserId << " " << stdTicketId << " " << std::endl;
+			std::string sql1 = "INSERT INTO Booking (Id,User_id,Ticket_id) VALUES ( " + ida + ","+ stdUserId +", " + stdTicketId + ");";
+			db.sqlExecute(sql1.c_str());
+			MessageBox::Show("ZAKUPIONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+
 	}
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->switchToAccount = true;
@@ -470,6 +537,12 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->switchToAccount = true;
 	this->Hide();
+}
+private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void textBox4_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

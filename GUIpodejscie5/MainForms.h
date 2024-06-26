@@ -1,6 +1,8 @@
 #pragma once
 #include "Register.h"
 #include "SqlManage.h"
+#include "MainApp.h"
+#include "UserId.h"
 #include <iostream>
 
 namespace GUIpodejscie5 {
@@ -24,7 +26,6 @@ namespace GUIpodejscie5 {
 			//TODO: W tym miejscu dodaj kod konstruktora
 			//
 		}
-
 	protected:
 		/// <summary>
 		/// Wyczyœæ wszystkie u¿ywane zasoby.
@@ -243,8 +244,10 @@ namespace GUIpodejscie5 {
 	public:bool switchToApp = false;
 	public:bool switchToRegister = false;
 	public:bool dzial = true;
+	public:int userid;
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
 		SqlManage db;
 		String^ password = textBox1->Text;
 		String^ login = textBox2->Text;
@@ -271,6 +274,7 @@ namespace GUIpodejscie5 {
 		}
 	}
 	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 		this->switchToRegister = true;
 		this->Hide();
 	}

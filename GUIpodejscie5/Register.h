@@ -291,7 +291,7 @@ namespace GUIpodejscie5 {
 		this->Hide();
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+		
 		SqlManage db;
 		String^ reglogin = textBox1->Text;
 		String^ regpassword = textBox2->Text;

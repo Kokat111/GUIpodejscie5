@@ -143,6 +143,7 @@
     </ClInclude>
     <ClInclude Include="sqlite3.h" />
     <ClInclude Include="SqlManage.h" />
+    <ClInclude Include="UserId.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainApp.resx">

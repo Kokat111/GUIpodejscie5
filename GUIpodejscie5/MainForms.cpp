@@ -2,12 +2,14 @@
 #include "MainApp.h"
 #include "Register.h"
 #include "MyAccount.h"
+#include "UserId.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
 
 [STAThreadAttribute]
 int main(array<String^>^ args) {
+    int userId;
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
     GUIpodejscie5::MainForms mainForm;
