@@ -227,6 +227,7 @@ namespace GUIpodejscie5 {
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(183, 31);
 			this->textBox4->TabIndex = 38;
+			this->textBox4->TextChanged += gcnew System::EventHandler(this, &MyAccount::textBox4_TextChanged_1);
 			// 
 			// label2
 			// 
@@ -295,17 +296,22 @@ private: System::Void textBox2_TextChanged(System::Object^ sender, System::Event
 
 		String^ UserId = textBox4->Text;
 		using namespace System::Runtime::InteropServices;
-		const char* charsp1 = (const char*)(Marshal::StringToHGlobalAnsi(TicketId)).ToPointer();
+		const char* charsp1 = (const char*)(Marshal::StringToHGlobalAnsi(UserId)).ToPointer();
 		std::string stdUserId = charsp1;
 		Marshal::FreeHGlobal(IntPtr((void*)charsp1));
 
 		int id = stoi(stdTicketId);
 		int i = db.sqlGetId("Booking");
-		std::string sql3 = "SELECT * FROM Booking WHERE User_id ='" + stdUserId + "'AND Ticket_id='" + stdTicketId + "'";
+		
+		std::cout << stdUserId<< stdTicketId;
+		std::string sql3 = "SELECT * FROM Booking WHERE User_id ='" + stdUserId + "' AND Ticket_id='" + stdTicketId + "'";
 		BookingData* bookingData = db.getBooking(sql3.c_str());
-
-		if (bookingData != NULL && id <= i)
+		//std::cout << bookingData->id;
+		//std::cout << i;
+		//std::cout << stdTicketId;
+		if (bookingData != NULL)
 		{
+			std::cout << "passif";
 			std::string sql1 = "DELETE FROM Booking WHERE User_id ='" + stdUserId + "'AND Ticket_id='" + stdTicketId + "'";
 			db.sqlExecute(sql1.c_str());
 			MessageBox::Show("ZWROCONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -343,7 +349,7 @@ private: System::Void button3_Click_1(System::Object^ sender, System::EventArgs^
 	DataTable^ dt = gcnew DataTable();
 	int ile = db.sqlGetIdWhere("Booking", " User_id = " + stdUserId + "");
 	std::cout << ile;
-	for (int i = 1; i < ile-1; i++)
+	for (int i = 1; i < ile; i++)
 	{
 		std::cout << "dziala";
 		std::string sid = std::to_string(i);
@@ -376,6 +382,8 @@ private: System::Void button3_Click_1(System::Object^ sender, System::EventArgs^
 
 		this->dataGridView1->Rows->Add(managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
 	}
+}
+private: System::Void textBox4_TextChanged_1(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
