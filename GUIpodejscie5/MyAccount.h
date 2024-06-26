@@ -231,13 +231,11 @@ public:bool switchToApp = false;
 private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show("ZWROCONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->switchToApp = true;
 	this->Hide();
-}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("ZWROCONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 };
 }

@@ -53,6 +53,7 @@ namespace GUIpodejscie5 {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::TextBox^ textBox3;
+	private: System::Windows::Forms::Button^ button4;
 
 
 
@@ -105,6 +106,7 @@ namespace GUIpodejscie5 {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -117,11 +119,11 @@ namespace GUIpodejscie5 {
 				this->Id, this->stacjaPocz,
 					this->stacjaKonc, this->godzOdjazdu, this->godzPrzyj, this->cena
 			});
-			this->dataGridView1->Location = System::Drawing::Point(1, 148);
+			this->dataGridView1->Location = System::Drawing::Point(12, 179);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->Size = System::Drawing::Size(802, 380);
+			this->dataGridView1->Size = System::Drawing::Size(847, 422);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainApp::dataGridView1_CellContentClick);
 			// 
@@ -179,13 +181,12 @@ namespace GUIpodejscie5 {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label1->ForeColor = System::Drawing::Color::BlueViolet;
-			this->label1->Location = System::Drawing::Point(292, 8);
+			this->label1->Location = System::Drawing::Point(329, 11);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(194, 19);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Wpisz ID pozadanego biletu";
-			this->label1->Click += gcnew System::EventHandler(this, &MainApp::label1_Click);
 			// 
 			// textBox2
 			// 
@@ -193,11 +194,10 @@ namespace GUIpodejscie5 {
 			this->textBox2->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
-			this->textBox2->Location = System::Drawing::Point(296, 33);
+			this->textBox2->Location = System::Drawing::Point(333, 36);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(183, 31);
 			this->textBox2->TabIndex = 18;
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MainApp::textBox2_TextChanged);
 			// 
 			// button1
 			// 
@@ -205,28 +205,21 @@ namespace GUIpodejscie5 {
 			this->button1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(278, 70);
+			this->button1->Location = System::Drawing::Point(315, 73);
 			this->button1->Name = L"button1";
-			this->button1->Padding = System::Windows::Forms::Padding(10, 10, 10, 10);
+			this->button1->Padding = System::Windows::Forms::Padding(10);
 			this->button1->Size = System::Drawing::Size(220, 63);
 			this->button1->TabIndex = 21;
 			this->button1->Text = L"KUP BILET";
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MainApp::button1_Click);
 			// 
-			// button2
+			// label6
 			// 
-			this->button2->BackColor = System::Drawing::Color::BlueViolet;
-			this->button2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(238)));
-			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(660, -1);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(133, 36);
-			this->button2->TabIndex = 22;
-			this->button2->Text = L"Moje Bilety";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &MainApp::button2_Click);
+			this->label6->Location = System::Drawing::Point(0, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(100, 23);
+			this->label6->TabIndex = 33;
 			// 
 			// button2
 			// 
@@ -252,7 +245,7 @@ namespace GUIpodejscie5 {
 			this->textBox1->Location = System::Drawing::Point(13, 61);
 			this->textBox1->Margin = System::Windows::Forms::Padding(4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(244, 20);
+			this->textBox1->Size = System::Drawing::Size(244, 16);
 			this->textBox1->TabIndex = 30;
 			// 
 			// button3
@@ -279,14 +272,29 @@ namespace GUIpodejscie5 {
 			this->textBox3->Location = System::Drawing::Point(13, 138);
 			this->textBox3->Margin = System::Windows::Forms::Padding(4);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(244, 20);
+			this->textBox3->Size = System::Drawing::Size(244, 16);
 			this->textBox3->TabIndex = 32;
+			// 
+			// button4
+			// 
+			this->button4->BackColor = System::Drawing::Color::BlueViolet;
+			this->button4->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->button4->ForeColor = System::Drawing::Color::White;
+			this->button4->Location = System::Drawing::Point(688, 19);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(171, 36);
+			this->button4->TabIndex = 34;
+			this->button4->Text = L"Moje konto";
+			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &MainApp::button4_Click);
 			// 
 			// MainApp
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(871, 738);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->textBox1);
@@ -458,6 +466,8 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			this->dataGridView1->Rows->Add(managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
 		}
 	}
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
