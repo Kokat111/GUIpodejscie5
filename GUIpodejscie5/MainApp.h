@@ -48,7 +48,11 @@ namespace GUIpodejscie5 {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::TextBox^ textBox3;
 
 
 
@@ -96,7 +100,11 @@ namespace GUIpodejscie5 {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -220,12 +228,70 @@ namespace GUIpodejscie5 {
 			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &MainApp::button2_Click);
 			// 
+			// button2
+			// 
+			this->button2->BackColor = System::Drawing::Color::BlueViolet;
+			this->button2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->button2->ForeColor = System::Drawing::Color::White;
+			this->button2->Location = System::Drawing::Point(13, 14);
+			this->button2->Margin = System::Windows::Forms::Padding(4);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(244, 41);
+			this->button2->TabIndex = 29;
+			this->button2->Text = L"ZNAJDZ POLACZENIA Z";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &MainApp::button2_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->BackColor = System::Drawing::Color::Gainsboro;
+			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->textBox1->Location = System::Drawing::Point(13, 61);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(244, 20);
+			this->textBox1->TabIndex = 30;
+			// 
+			// button3
+			// 
+			this->button3->BackColor = System::Drawing::Color::BlueViolet;
+			this->button3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->button3->ForeColor = System::Drawing::Color::White;
+			this->button3->Location = System::Drawing::Point(13, 89);
+			this->button3->Margin = System::Windows::Forms::Padding(4);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(244, 41);
+			this->button3->TabIndex = 31;
+			this->button3->Text = L"ZNAJDZ POLACZENIA DO";
+			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &MainApp::button3_Click);
+			// 
+			// textBox3
+			// 
+			this->textBox3->BackColor = System::Drawing::Color::Gainsboro;
+			this->textBox3->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->textBox3->Location = System::Drawing::Point(13, 138);
+			this->textBox3->Margin = System::Windows::Forms::Padding(4);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(244, 20);
+			this->textBox3->TabIndex = 32;
+			// 
 			// MainApp
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(805, 529);
+			this->ClientSize = System::Drawing::Size(871, 738);
+			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button2);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->label1);
@@ -254,9 +320,11 @@ namespace GUIpodejscie5 {
 
 		for (int i = 0; i < id; i++)
 		{
-			std::string sid = std::to_string(i+1);
-			std::string sql1 = "SELECT * FROM TicketData WHERE Id ="+sid+"";
+			std::string sid = std::to_string(i + 1);
+			std::string sql1 = "SELECT * FROM TicketData WHERE Id =" + sid + "";
 			TicketData* ticketData = db.getTicket(sql1.c_str());
+
+
 			ticketData->id;
 			ticketData->stacjaPocz;
 			ticketData->stacjaKonc;
@@ -277,27 +345,119 @@ namespace GUIpodejscie5 {
 			System::String^ managedCena = StdStringToSystemString(stdCena);
 
 
-			this->dataGridView1->Rows->Add( managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
+			this->dataGridView1->Rows->Add(managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
 		}
 	}
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("ZAKUPIONO BILET","  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("ZAKUPIONO BILET", "  ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	public:bool switchToAccount = false;
+	private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->switchToAccount = true;
+		this->Close();
+	}
+
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		SqlManage db;
+		String^ from = textBox1->Text;
+
+		using namespace System::Runtime::InteropServices;
+		const char* charf = (const char*)(Marshal::StringToHGlobalAnsi(from)).ToPointer();
+		std::string stdfrom = charf;
+		Marshal::FreeHGlobal(IntPtr((void*)charf));
+
+		std::string sql1 = "SELECT * FROM TicketData WHERE stacjaPocz='" + stdfrom + "'";
+		TicketData* ticketData = db.getTicket(sql1.c_str());
+
+		int id = db.sqlGetId("TicketData");
+		DataTable^ dt = gcnew DataTable();
+		id = id - 1;
+		this->dataGridView1->Rows->Add("///////////////////////", "///////////////////////","///////////////////////",
+			"///////////////////////", "///////////////////////", "///////////////////////");
+
+		for (int i = 0; i < id; i++)
+		{
+			std::string sid = std::to_string(i + 1);
+			std::string sql1 = "SELECT * FROM TicketData WHERE Id =" + sid + "";
+			TicketData* ticketData = db.getTicket(sql1.c_str());
+
+
+			ticketData->id;
+			ticketData->stacjaPocz;
+			ticketData->stacjaKonc;
+			ticketData->godzOdjazdu;
+			ticketData->godzPrzyjazdu;
+			ticketData->cena;
+			std::string stdId = ticketData->id;
+			System::String^ managedId = StdStringToSystemString(stdId);
+			std::string stdSP = ticketData->stacjaPocz;
+			System::String^ managedSP = StdStringToSystemString(stdSP);
+			std::string stdSK = ticketData->stacjaKonc;
+			System::String^ managedSK = StdStringToSystemString(stdSK);
+			std::string stdGO = ticketData->godzOdjazdu;
+			System::String^ managedGO = StdStringToSystemString(stdGO);
+			std::string stdGP = ticketData->godzPrzyjazdu;
+			System::String^ managedGP = StdStringToSystemString(stdGP);
+			std::string stdCena = ticketData->cena;
+			System::String^ managedCena = StdStringToSystemString(stdCena);
+
+			if (stdfrom == ticketData->stacjaPocz) {
+				this->dataGridView1->Rows->Add(managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
+			}
+		}
 }
-public:bool switchToAccount = false;
-private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->switchToAccount = true;
-	this->Hide();
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	SqlManage db;
+	String^ to = textBox3->Text;
+
+	using namespace System::Runtime::InteropServices;
+	const char* chart = (const char*)(Marshal::StringToHGlobalAnsi(to)).ToPointer();
+	std::string stdto = chart;
+	Marshal::FreeHGlobal(IntPtr((void*)chart));
+
+	std::string sql1 = "SELECT * FROM TicketData WHERE stacjaKonc='" + stdto + "'";
+	TicketData* ticketData = db.getTicket(sql1.c_str());
+
+	int id = db.sqlGetId("TicketData");
+	DataTable^ dt = gcnew DataTable();
+	id = id - 1;
+	this->dataGridView1->Rows->Add("///////////////////////", "///////////////////////", "///////////////////////",
+		"///////////////////////", "///////////////////////", "///////////////////////");
+
+	for (int i = 0; i < id; i++)
+	{
+		std::string sid = std::to_string(i + 1);
+		std::string sql1 = "SELECT * FROM TicketData WHERE Id =" + sid + "";
+		TicketData* ticketData = db.getTicket(sql1.c_str());
+
+
+		ticketData->id;
+		ticketData->stacjaPocz;
+		ticketData->stacjaKonc;
+		ticketData->godzOdjazdu;
+		ticketData->godzPrzyjazdu;
+		ticketData->cena;
+		std::string stdId = ticketData->id;
+		System::String^ managedId = StdStringToSystemString(stdId);
+		std::string stdSP = ticketData->stacjaPocz;
+		System::String^ managedSP = StdStringToSystemString(stdSP);
+		std::string stdSK = ticketData->stacjaKonc;
+		System::String^ managedSK = StdStringToSystemString(stdSK);
+		std::string stdGO = ticketData->godzOdjazdu;
+		System::String^ managedGO = StdStringToSystemString(stdGO);
+		std::string stdGP = ticketData->godzPrzyjazdu;
+		System::String^ managedGP = StdStringToSystemString(stdGP);
+		std::string stdCena = ticketData->cena;
+		System::String^ managedCena = StdStringToSystemString(stdCena);
+
+		if (stdto == ticketData->stacjaKonc) {
+			this->dataGridView1->Rows->Add(managedId, managedSP, managedSK, managedGO, managedGP, managedCena);
+		}
+	}
 }
 };
-	
 }
